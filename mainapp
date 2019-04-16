@@ -1,2 +1,120 @@
-#Glamping World Phone Order Application Prototype
+# Glamping World App Prototype mk1
 
+from tkinter import * # Import tkinter
+from tkinter import messagebox # import messagebox
+
+class mainApp():
+    def __init__(self):
+
+        return
+
+# Window 1 Class (Customer Information)
+class Window1():
+    def __init__(self):
+        window = Tk() # Create a window
+        window.title("Order Processing Application") # Set title of a window
+        window.geometry('920x500')
+
+        # set up window and import picture for the window
+        photo = PhotoImage(file=r"P:\GWlogo.gif")
+        
+        logoFrame = Frame(window, width = 320, height = 160)
+        logoFrame.grid(row = 0, column = 0)
+        stepTitleFrame = Frame(window, width = 640, height = 160)
+        stepTitleFrame.grid(row = 0, column = 1)
+        statusFrame = Frame(window, width = 320, height = 400, bg = 'green')
+        statusFrame.grid(row = 1, column = 0)
+        inputFrame = Frame(window, width = 640, height = 400)
+        inputFrame.grid(row=1,column=1)
+
+        # imports Glamping World logo into the logo frame
+        logoPic = Label(logoFrame, image = photo)
+        logoPic.pack()
+
+        # set up title label for the title frame
+        internalTitle = Label(window, text = "Customer Information", fg = 'green', font=('Arial', 44))
+        internalTitle.place(x=330,y=40)
+
+        # ***set up the labels for the status frame and the shape that will be next to the current status*** 
+        custInfStat = Label(window, text="Customer Information",font=("Helvetica", 14), fg = 'white', bg='green')
+        custInfStat.place(x=72.5,y=200)
+        prodInfStat = Label(window, text="Product Information",font=("Helvetica", 14), fg = 'white', bg='green')
+        prodInfStat.place(x=72.5,y=250)
+        shopInfStat = Label(window, text="Shipping Information",font=("Helvetica", 14), fg = 'white', bg='green')
+        shopInfStat.place(x=72.5,y=300)
+        billInfStat = Label(window, text="Billing Information",font=("Helvetica", 14), fg = 'white', bg='green')
+        billInfStat.place(x=72.5,y=350)
+        summaryStat = Label(window, text="Transaction Summary",font=("Helvetica", 14), fg = 'white', bg='green')
+        summaryStat.place(x=72.5,y=400)
+        canvas = Canvas(window, width = 10, height = 10, bd = 2, bg = 'white')
+        canvas.place(x=50,y=205)
+        
+        # ***set up labels for the input frame in the left column of the window, align labels left (Sticky=W)***
+        idLabel = Label(window, text = "Customer ID *", font=("Arial", 16))
+        idLabel.place(x=330,y=180)                  
+        fnLabel = Label(window, text = "First Name *", font=("Arial", 16))
+        fnLabel.place(x=330,y=220)
+        lnLabel = Label(window, text = "Last Name *", font=("Arial", 16 ))
+        lnLabel.place(x=330,y=260)
+        phoneLabel = Label(window, text = "Phone Number *", font=("Arial", 16))
+        phoneLabel.place(x=330,y=300)
+        emailLabel = Label(window, text = "Email *", font=("Arial", 16))
+        emailLabel.place(x=330,y=340)
+        returnCust = Label(window, text = 'Returning Customer? *', font=('Arial', 16))
+        returnCust.place(x=330,y=380)
+        reqField = Label(window, text = '  * - required field', font=('Arial', 12))
+        reqField.place(x=330,y=410)
+        
+        # ***set up the input areas and checkboxes for the input frame in the right column, using Entry for textboxes and assigning the values entered to variables***
+        
+        # checkboxes
+        self.language = IntVar()
+        englishCheck = Radiobutton(window, text = 'English', variable = self.language, value = 1)
+        englishCheck.place(x=540,y=120)
+        spanishCheck = Radiobutton(window, text = 'Spanish', variable = self.language, value = 2)
+        spanishCheck.place(x=620,y=120)
+        # input fields
+        self.CustomerID = StringVar()
+        custInput = Entry(window, textvariable = self.CustomerID, width = 30, font = ("Arial", 16))
+        custInput.place(x=500,y=180)
+        self.firstName = StringVar()
+        fnInput = Entry(window, textvariable = self.firstName, width = 30, font = ("Arial", 16))
+        fnInput.place(x=500,y=220)
+        self.lastName = StringVar()
+        lnInput = Entry(window, textvariable = self.lastName, width = 30, font = ("Arial", 16))
+        lnInput.place(x=500,y=260)
+        self.phoneNumber = StringVar()
+        phoneInput = Entry(window, textvariable = self.phoneNumber, width = 30, font = ("Arial", 16))
+        phoneInput.place(x=500,y=300)
+        self.email = StringVar()
+        emailInput = Entry(window, textvariable = self.email, width = 30, font = ("Arial", 16))
+        emailInput.place(x=500,y=340)
+        # radio buttons
+        self.retCust = IntVar()
+        yesRetCust = Radiobutton(window, text = "Yes", variable = self.retCust, value = 1)
+        yesRetCust.place(x=550,y=380)
+        noRetCust = Radiobutton(window, text = "No", variable = self.retCust, value = 2)
+        noRetCust.place(x=600,y=380)
+
+        # help button and window(will bring up a messagebox that will describe what you should be inputting into each window)
+        def help():
+            helpmenu = messagebox.showinfo("Help", "Welcome to the Help Window for Customer Information, more coming soon!")    
+        helpButton = Button(window, text = "?", font = ('Arial', 14), command = help)
+        helpButton.place(x=350,y=450)
+    
+        # next button (tempororary purpose will be to test functionality of inputs, and then will be converted to go to next step in program)
+        nextButton = Button(window, text = "Next", fg='white',bg='blue', width = 10, height = 2, command = self.printoff)
+        nextButton.place(x=800,y=450)
+
+        window.mainloop() # Create an event loop to display the window
+
+    def printoff(self):
+        print(self.language.get())
+        print(self.CustomerID.get())
+        print(self.firstName.get())
+        print(self.lastName.get())
+        print(self.phoneNumber.get())
+        print(self.email.get())
+        print(self.retCust.get())
+
+Window1()  # Create GUI 
